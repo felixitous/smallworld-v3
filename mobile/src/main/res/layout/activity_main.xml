@@ -5,12 +5,6 @@
     <include android:id="@+id/toolbar_actionbar" layout="@layout/toolbar_default"
         android:layout_width="match_parent" android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar_actionbar"
-        android:id="@+id/recentsList" />
-
     <android.support.v4.widget.DrawerLayout android:id="@+id/drawer"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent" android:layout_height="match_parent"
@@ -26,6 +20,13 @@
             android:layout_height="match_parent" android:layout_gravity="start"
             app:layout="@layout/fragment_navigation_drawer" />
     </android.support.v4.widget.DrawerLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar_actionbar"
+        android:id="@+id/recentsList"
+        android:clickable="true"/>
 
 
 

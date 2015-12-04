@@ -38,6 +38,7 @@
                 android:layout_alignParentTop="true"
                 android:textSize="30sp"
                 android:textColor="@color/black"
+                android:background="?android:attr/selectableItemBackground"
                 />
 
             <!--<TextView-->

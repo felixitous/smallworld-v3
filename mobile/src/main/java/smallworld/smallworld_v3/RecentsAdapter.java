@@ -1,8 +1,11 @@
 package smallworld.smallworld_v3;
 
+import android.content.ClipData;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,7 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.UserView
 
     RecentsAdapter(List<User> users){
         this.users = users;
+
     }
 
     @Override
@@ -38,6 +42,7 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.UserView
     public void onBindViewHolder(UserViewHolder personViewHolder, int i) {
         personViewHolder.personName.setText(users.get(i).name);
         personViewHolder.personPhoto.setImageResource(users.get(i).photoId);
+
     }
 
     @Override
@@ -45,7 +50,7 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.UserView
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public static class UserViewHolder extends RecyclerView.ViewHolder {
+    public static class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cv;
         TextView personName;
         ImageView personPhoto;
@@ -58,6 +63,16 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.UserView
                     "fonts/muli.ttf");
             personName.setTypeface(tf);
             personPhoto = (ImageView)itemView.findViewById(R.id.person_photo);
+            itemView.setOnClickListener(this);
         }
+
+        // Handles the row being being clicked
+        @Override
+        public void onClick(View view) {
+            Log.d("do", "something");
+            Intent intent = new Intent(view.getContext(), ComplicatedProfile.class);
+            view.getContext().startActivity(intent);
+        }
+
     }
 }
