@@ -4,10 +4,15 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity
@@ -18,6 +23,7 @@ public class MainActivity extends ActionBarActivity
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private Toolbar mToolbar;
+    private List<User> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +31,42 @@ public class MainActivity extends ActionBarActivity
         setContentView(R.layout.activity_main);
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Small World");
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.fragment_drawer);
 
         // Set up the drawer.
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
+
+        // Setting up the Recents List
+        RecyclerView rv = (RecyclerView)findViewById(R.id.recentsList);
+        rv.setHasFixedSize(true);
+
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setLayoutManager(llm);
+
+        initializeData();
+        RecentsAdapter adapter = new RecentsAdapter(users);
+        rv.setAdapter(adapter);
+
+
+
+
         // populate the navigation drawer
 //        mNavigationDrawerFragment.setUserData("John Doe", "johndoe@doe.com", BitmapFactory.decodeResource(getResources(), R.drawable.avatar));
     }
+
+    private void initializeData(){
+        users = new ArrayList<>();
+        users.add(new User("Brian Truong", R.drawable.brian));
+        users.add(new User("Lucky Ding", R.drawable.lucky));
+        users.add(new User("Angela Tang", R.drawable.angela));
+        users.add(new User("Kyle Chang", R.drawable.kyle));
+        users.add(new User("Kelly Shen", R.drawable.kelly));
+        users.add(new User("Alice Cai", R.drawable.alice));
+    }
+
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
